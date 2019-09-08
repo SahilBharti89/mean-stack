@@ -9,6 +9,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { RouterModule, Routes } from '@angular/router';
 import { BookDetailComponent } from './book-detail/book-detail.component';
 import { BookCreateComponent } from './book-create/book-create.component';
+import { BookEditComponent } from './book-edit/book-edit.component';
 
 const appRoutes: Routes = [
   {
@@ -27,6 +28,11 @@ const appRoutes: Routes = [
     data: { title: 'Create Book' }
   },
   {
+    path: 'book-edit/:id',
+    component: BookEditComponent,
+    data: {title: 'Edit Book'}
+  },
+  {
     path: '',
     redirectTo: '/books',
     pathMatch: 'full'
@@ -37,7 +43,8 @@ const appRoutes: Routes = [
     AppComponent,
     BookComponent,
     BookDetailComponent,
-    BookCreateComponent
+    BookCreateComponent,
+    BookEditComponent
   ],
   imports: [
     BrowserModule,
@@ -46,7 +53,7 @@ const appRoutes: Routes = [
     AppRoutingModule,
     RouterModule.forRoot(
       appRoutes,
-      { enableTracing: true, useHash: true} // <-- debugging purposes only
+      { enableTracing: true, useHash: false} // <-- debugging purposes only
     )
   ],
   providers: [],
