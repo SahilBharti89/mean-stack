@@ -11,7 +11,7 @@ import { HttpClient } from '@angular/common/http';
 export class BookCreateComponent implements OnInit {
 
   //book = {};
-  book: any;
+  book: any = {};
 
   constructor(private http: HttpClient, private router: Router) { }
 
@@ -19,10 +19,10 @@ export class BookCreateComponent implements OnInit {
   }
 
   saveBook() {
-    this.http.post('http://localhost:3000/book', this.book)
+    this.http.post('/book', this.book)
       .subscribe(res => {
           let id = res['_id'];
-          this.router.navigate(['http://localhost:3000/book-details', id]);
+          this.router.navigate(['/book-details', id]);
         }, (err) => {
           console.log(err);
         }

@@ -11,7 +11,7 @@ import { HttpClient } from '@angular/common/http';
 export class BookEditComponent implements OnInit {
 
   //book = {};
-  book: any;
+  book: any = {};
   constructor(private http: HttpClient, private router: Router, private route: ActivatedRoute) { }
 
   ngOnInit() {
@@ -19,16 +19,17 @@ export class BookEditComponent implements OnInit {
   }
 
   getBook(id){
-    this.http.get('http://localhost:3000/book/'+id).subscribe( data => {
+    this.http.get('/book/'+id).subscribe( data => {
       this.book = data;
     });
   }
 
-  updateBook(id, data){
-    this.http.put('http://localhost:3000/book/'+id, data).subscribe(res =>
+  updateBook(id){
+    this.book.updated_date = Date.now();
+    this.http.put('/book/'+id, this.book).subscribe(res =>
       {
         let id = res['_id'];
-        this.router.navigate(['http://localhost:3000/book-details', id]);
+        this.router.navigate(['/book-details', id]);
       }, (err) => {
         console.log(err);
       });
